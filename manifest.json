@@ -3,7 +3,7 @@
     "name": "My First Extension",
     "version": "1.0.1",
     "background": {
-        "service_worker": "background.js",
+        "service_worker": "service-worker.js",
         "type": "module"
     }
 }
