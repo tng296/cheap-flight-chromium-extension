@@ -1,11 +1,11 @@
 import './App.css'
-import Chatbot from '../components/Chatbot'
+import FlightChatbot from '../components/FlightChatbot'
 
 function App() {
 
   return (
     <div>
-      <Chatbot />
+      <FlightChatbot />
     </div>
   )
 }
