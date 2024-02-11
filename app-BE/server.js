@@ -16,44 +16,42 @@ var amadeus = new Amadeus({
     clientSecret: '011buGaGYGI9xDpd'
 });
 
-app.get("/",(req,res)=>{
-   res.send("hello world")
-})
 
-app.post("/api", async (req,res)=>{
+
+app.get("/api", async (req, res) => {
     let message = req.body.message
     let response = await chatGPT(message)
-    
-    if(response != "nonsense"){
+
+    if (response != "nonsense") {
         response = JSON.parse(response)
         console.log(response)
     }
 
     //Important originLocationCode, destinationLocationCode, depatureDate, adults,  
-    if(response.originLocationCode == "" || response.destinationLocationCode == "" || response.departureDate == "" || response.adults == ""){
+    if (response.originLocationCode == "" || response.destinationLocationCode == "" || response.departureDate == "" || response.adults == "") {
         res.send("Missing important information please redo")
-    }else if(response == "nonsense"){
+    } else if (response == "nonsense") {
         res.send("nonsense message please input again")
-    }else{
+    } else {
         amadeus.shopping.flightOffersSearch.get({
             originLocationCode: response.originLocationCode,
             destinationLocationCode: response.destinationLocationCode,
             departureDate: response.departureDate,
-            returnDate:response.returnDate, 
+            returnDate: response.returnDate,
             adults: Number(response.adults),
             children: response.chilren == '' ? 0 : Number(response.children),
             infants: response.infants == '' ? 0 : Number(response.infants),
-            nonStop:true,
-            max:5
-        }).then(function(response){
+            nonStop: true,
+            max: 5
+        }).then(function (response) {
             res.send(response.data);
-        }).catch(function(responseError){
+        }).catch(function (responseError) {
             console.log(responseError.code);
         });
     }
-    
+
 })
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`Server is running at port ${port}`)
 })
