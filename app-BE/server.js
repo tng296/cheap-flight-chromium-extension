@@ -21,7 +21,7 @@ var amadeus = new Amadeus({
 app.get("/api", async (req, res) => {
     let message = req.body.message
     let response = await chatGPT(message)
-
+    console.log(message)
     if (response != "nonsense") {
         response = JSON.parse(response)
         console.log(response)

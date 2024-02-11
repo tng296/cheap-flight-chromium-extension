@@ -7,7 +7,8 @@ const MessageParser = ({ children, actions }) => {
             actions.handleHello();
         }
         else {
-            actions.handleResponse();
+            console.log(message);
+            actions.handleResponse(message);
         }
     };
 
