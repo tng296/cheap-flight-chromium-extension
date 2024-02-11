@@ -13,15 +13,17 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
         }));
     };
 
-    const handleResponse = async (userInput) => {
+    const handleResponse = async () => {
 
-        await Axios.get('http://localhost:3000/api', { message: userInput })
+        await Axios.get('http://localhost:3000/api', { message: userResponse })
             .then((response) => {
                 console.log(response.data);
             }).catch(error => {
                 console.log(error);
             });
     };
+
+    console.log(userResponse)
 
     return (
         <div>

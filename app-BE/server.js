@@ -28,8 +28,9 @@ app.get("/api", async (req, res) => {
     }
 
     //Important originLocationCode, destinationLocationCode, depatureDate, adults,  
-    if (response.originLocationCode == "" || response.destinationLocationCode == "" || response.departureDate == "" || response.adults == "") {
+    if (response.originLocationCode == "" || response.destinationLocationCode == "" || response.departureDate == "" || response.adults == "" || response.returnDate == "") {
         res.send("Missing important information please redo")
+        const importantItem = new Set([])
     } else if (response == "nonsense") {
         res.send("nonsense message please input again")
     } else {
