@@ -16,7 +16,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     const handleResponse = async (userInput) => {
         console.log("hello from handleResponse")
         console.log(userInput)
-        await Axios.get('http://localhost:3000/api', { message: userInput }, { withCredentials: true })
+        await Axios.post('http://localhost:3000/api', { message: userInput })
             .then((response) => {
                 console.log(response.data);
             }).catch(error => {

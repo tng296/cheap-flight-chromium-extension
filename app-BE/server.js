@@ -18,7 +18,7 @@ var amadeus = new Amadeus({
 
 
 
-app.get("/api", async (req, res) => {
+app.post("/api", async (req, res) => {
     let message = req.body.message
     let response = await chatGPT(message)
     console.log(message)
