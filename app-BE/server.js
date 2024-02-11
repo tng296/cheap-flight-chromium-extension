@@ -25,6 +25,8 @@ app.post("/api", async (req, res) => {
         response = JSON.parse(response)
     }
 
+    console.log(response)
+
     //Important originLocationCode, destinationLocationCode, depatureDate, adults,  
     if (response.originLocationCode == "" || response.destinationLocationCode == "" || response.departureDate == "" || response.adults == "" || response.returnDate == "") {
         
@@ -36,10 +38,10 @@ app.post("/api", async (req, res) => {
             }
         }
 
-        res.status(400).json({missingItems:missingItems})
+        res.json({missingItems:missingItems})
 
     } else if (response == "nonsense") {
-        res.status(400).json({missingItems:"nonsense"})
+        res.json({missingItems:"nonsense"})
     } else {
         amadeus.shopping.flightOffersSearch.get({
             originLocationCode: response.originLocationCode,
@@ -50,7 +52,6 @@ app.post("/api", async (req, res) => {
             children: response.chilren == '' ? 0 : Number(response.children),
             infants: response.infants == '' ? 0 : Number(response.infants),
             currencyCode:'USD',
-            nonStop: true,
             max: 5
         }).then(function (response) {
             res.send(response.data);

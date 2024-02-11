@@ -27,6 +27,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
         console.log(userInput)
         await Axios.post('http://localhost:3000/api', { message: userInput })
             .then((response) => {
+                console.log(response.data)
                 handleFlightDetails(response.data);
             }).catch(error => {
                 console.log(error);
@@ -35,20 +36,38 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
 
     const handleFlightDetails = (details) => {
-        flightDetails.forEach((detail, index) => {
-            const botMessage = createChatBotMessage(`Your flight details are as follows:
-            Flight number ${index + 1} I found
-            Instant Ticketing Required: ${detail.instantTicketingRequired}
-            Price: ${detail.price.grandTotal}
-            Last Ticketing Date: ${detail.lastTicketingDate}
-            Number of Bookable Seats: ${detail.numberOfBookableSeats}
-            One Way: ${details.oneWay}`);
-
+        if(details.missingItems == undefined){
+            details.forEach((detail, index) => {
+                const botMessage = createChatBotMessage(`Your flight details are as follows:
+                Flight number ${index + 1} I found
+                Instant Ticketing Required: ${detail.instantTicketingRequired}
+                Price: ${detail.price.grandTotal}
+                Last Ticketing Date: ${detail.lastTicketingDate}
+                Number of Bookable Seats: ${detail.numberOfBookableSeats}
+                One Way: ${detail.oneWay}
+                Airline Code: ${detail.validatingAirlineCodes}`);
+    
+                setState((prev) => ({
+                    ...prev,
+                    messages: [...prev.messages, botMessage],
+                }));
+            });
+        }else{
+            let botMessage = ''
+            //createChatBotMessage(`Please enter more details input`);
+            if(typeof details.missingItems !== "string"){
+                botMessage = createChatBotMessage(`Your input missings: ${
+                    details.missingItems.map(item=>item)
+                }`)
+            }else{
+                botMessage = createChatBotMessage(`You enter a nonsense text, please try again`)
+            }
             setState((prev) => ({
                 ...prev,
                 messages: [...prev.messages, botMessage],
             }));
-        });
+        }
+        
     };
 
     return (

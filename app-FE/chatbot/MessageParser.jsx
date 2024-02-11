@@ -6,12 +6,10 @@ const MessageParser = ({ children, actions }) => {
         if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
             actions.handleHello();
         }
-        else if (message.includes('from') && message.includes('to') && message.includes('flight')) {
+        else{
             actions.handleResponse(message);
         }
-        else {
-            console.log('no action')
-        }
+        
     };
 
     return (
