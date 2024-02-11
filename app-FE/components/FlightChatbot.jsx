@@ -3,7 +3,8 @@ import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
 import ActionProvider from '../chatbot/ActionProvider'
 import MessageParser from '../chatbot/MessageParser'
-import config from '/Users/vincentnguyen/Developer/CodeRed-/app-FE/chatbot/config.js'
+import config from '../chatbot/config.js'
+import './flightChatbot.css'
 
 
 const FlightChatbot = () => {
