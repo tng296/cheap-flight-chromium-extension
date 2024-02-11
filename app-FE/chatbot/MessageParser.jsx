@@ -1,9 +1,16 @@
+// in MessageParser.js
 import React from 'react';
 
 const MessageParser = ({ children, actions }) => {
     const parse = (message) => {
         if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-            console.log("Hello there! How can I help you today?");
+            actions.handleHello();
+        }
+        else if (message.includes('from') && message.includes('to') && message.includes('flight')) {
+            actions.handleResponse(message);
+        }
+        else {
+            console.log('no action')
         }
     };
 
@@ -12,7 +19,7 @@ const MessageParser = ({ children, actions }) => {
             {React.Children.map(children, (child) => {
                 return React.cloneElement(child, {
                     parse: parse,
-                    actions: {},
+                    actions,
                 });
             })}
         </div>

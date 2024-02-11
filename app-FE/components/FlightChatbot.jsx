@@ -3,8 +3,9 @@ import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
 import ActionProvider from '../chatbot/ActionProvider'
 import MessageParser from '../chatbot/MessageParser'
-import config from '../chatbot/config.js'
 import './flightChatbot.css'
+import config from '../chatbot/config.js'
+import { Axios } from 'axios'
 
 
 const FlightChatbot = () => {
