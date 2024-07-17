@@ -12,8 +12,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 var amadeus = new Amadeus({
-    clientId: 'UPXhjTFuFEbCwgKnTeznhykO5qMAYjBH',
-    clientSecret: '011buGaGYGI9xDpd'
+    clientId: '',
+    clientSecret: ''
 });
 
 
