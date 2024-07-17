@@ -1,8 +1,8 @@
 const Amadeus = require('amadeus')
 
 var amadeus = new Amadeus({
-    clientId: 'UPXhjTFuFEbCwgKnTeznhykO5qMAYjBH',
-    clientSecret: '011buGaGYGI9xDpd'
+    clientId: '',
+    clientSecret: ''
 });
 
 const callAmadeus = ()=>{
